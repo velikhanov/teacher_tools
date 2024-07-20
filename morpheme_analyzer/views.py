@@ -17,7 +17,5 @@ def analyze(request) -> JsonResponse:
         parsed_text = parse_text(body["textToAnalyze"])
         analyzed_text = analyze_text(parsed_text)
         return JsonResponse({"analyzed_text": analyzed_text})
-        # return render(request, "result.html", {
-        #     "analyzed_text": analyzed_text
-        # })
+
     return JsonResponse({"error": "Something went wrong!"})

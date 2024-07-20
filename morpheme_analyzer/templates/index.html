@@ -10,8 +10,8 @@
 <body>
     <section class="container">
         <textarea name="textToAnalyze" id="textToAnalyze"></textarea>
+        {% csrf_token %}
         <div class="button-block"><button id="submit_button" type="button"><span class="button-text show">Submit</span><div class="loader hide"></div></button></div>
-
         <div class="text-container-block"><div id="text-container"></div></div>
     </section>
     <script src="{% static 'js/main.js' %}"></script>

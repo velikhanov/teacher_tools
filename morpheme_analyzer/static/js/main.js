@@ -11,7 +11,7 @@ document.getElementById("submit_button").addEventListener("click", function(even
         fetch("/analyze", {
             method: "POST",
             headers: {
-                "X-CSRFToken": getCookie("csrftoken"),
+                "X-CSRFToken": document.querySelector('input[name="csrfmiddlewaretoken"]').value,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({textToAnalyze})
@@ -65,27 +65,5 @@ function toggleShow(block, action) {
 function removeLoader() {
     toggleShow(document.querySelector(".loader"), "hide");
     toggleShow(document.querySelector(".button-text"), "show");
-}
-
-// Funtion to get the value of a specific cookie
-function getCookie(cookieName) {
-    // Split document.cookie by semicolons into an array
-    const cookies = document.cookie.split(";");
-  
-    // Iterate through the cookies array
-    for (let i = 0; i < cookies.length; i++) {
-      let cookie = cookies[i];
-  
-      // Remove leading spaces from the cookie
-      while (cookie.charAt(0) === " ") {
-        cookie = cookie.substring(1);
-      }
-  
-      // Check if the cookie starts with the given cookieName
-      if (cookie.indexOf(cookieName + "=") === 0) {
-        return cookie.substring(cookieName.length + 1); // Return the value of the cookie
-      }
-    }
-    return ""; // Return an empty string if the cookie is not found
 }
   
