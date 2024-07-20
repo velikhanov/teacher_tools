@@ -81,10 +81,18 @@ def normalize_word(word: str) -> str:
     )
 
     response_json = response.json()
+    while response_json["status"] == "typo":
+        response_json = requests.post(
+            url=API_URL,
+            headers={
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            json={"word": response_json["items"][0]}
+        ).json()
+
     if response_json["status"] == "ok":
         word = response_json["word_baseform"]
-    elif response_json["status"] == "typo":
-        word = response_json["status"]["items"][0]
 
     return word
 
